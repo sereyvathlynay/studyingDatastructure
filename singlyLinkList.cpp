@@ -57,6 +57,22 @@ void insert(struct Node **head, int item, int pos){
     p->next = temp;
 }
 
+// Delete node at the nth position
+void deleteNode(struct Node **head, int pos){
+    struct Node *temp1 = *head;
+    if(pos == 1){
+        *head = temp1->next;
+        free(temp1);
+        return;
+    }
+    struct Node *temp2;
+    for(int i = 0; i<pos-2; i++)
+        temp1 = temp1->next;
+    temp2 = temp1->next;
+    temp1->next = temp2->next;
+    free(temp2);
+}
+
 void viewAll(struct Node **head)
 {
     struct Node *p;
@@ -82,6 +98,9 @@ int main()
     cout<<endl;
     insert(&head, 100, 3);
     cout<<"Insert 100 to position 3"<<endl;
+    viewAll(&head);
+    deleteNode(&head, 3);
+    cout<<endl;
     viewAll(&head);
     return 0;
 }
