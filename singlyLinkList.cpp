@@ -73,6 +73,19 @@ void deleteNode(struct Node **head, int pos){
     free(temp2);
 }
 
+void reverse(struct Node **head){
+    struct Node *cur, *prev, *next;
+    prev = NULL;
+    cur = *head;
+    while(cur != NULL){
+        next = cur->next;
+        cur->next = prev;
+        prev = cur;
+        cur = next;
+    }
+    *head = prev;
+}
+
 void viewAll(struct Node **head)
 {
     struct Node *p;
@@ -82,6 +95,7 @@ void viewAll(struct Node **head)
         cout << p->info << ' ';
         p = p->next;
     }
+    cout<<endl;
 }
 
 int main()
@@ -93,15 +107,18 @@ int main()
         insert_first(&head, i);
         insert_last(&head, i);
         viewAll(&head);
-        cout<<endl;
     }
     cout<<endl;
     insert(&head, 100, 3);
     cout<<"Insert 100 to position 3"<<endl;
     viewAll(&head);
-    deleteNode(&head, 3);
-    cout<<endl;
+    reverse(&head);
+    cout << "Reversed List" <<endl;
     viewAll(&head);
+    deleteNode(&head, 3);
+    cout<<"Delete Node at position 3"<<endl;
+    viewAll(&head);
+    
     return 0;
 }
 
