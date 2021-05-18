@@ -73,7 +73,7 @@ void deleteNode(struct Node **head, int pos){
     free(temp2);
 }
 
-void reverse(struct Node **head){
+/*void reverse(struct Node **head){
     struct Node *cur, *prev, *next;
     prev = NULL;
     cur = *head;
@@ -84,6 +84,19 @@ void reverse(struct Node **head){
         cur = next;
     }
     *head = prev;
+}*/
+
+//reverse list using recursion
+struct Node *reverse(struct Node *head){
+    struct Node *p = head;
+    if(p->next == NULL){
+        return p;
+    }
+    head = reverse(p->next);
+    struct Node *q = p->next;
+    p->next = NULL;
+    q->next = p;
+    return head;
 }
 
 void viewAll(struct Node **head)
@@ -98,6 +111,26 @@ void viewAll(struct Node **head)
     cout<<endl;
 }
 
+void Print(struct Node *head){
+    if(head == NULL){
+        cout<<endl;
+        return;
+    }
+    cout<<head->info<<" ";
+    Print(head->next);
+    
+}
+
+void reversePrint(struct Node *head)
+{
+    if (head == NULL)
+    {
+        return;
+    }
+    reversePrint(head->next);
+    cout << head->info << " ";
+}
+
 int main()
 {
     struct Node *head;
@@ -105,20 +138,21 @@ int main()
 
     for (int i = 1; i <= 10; i++){
         insert_first(&head, i);
-        insert_last(&head, i);
+        //insert_last(&head, i);
         viewAll(&head);
     }
     cout<<endl;
     insert(&head, 100, 3);
     cout<<"Insert 100 to position 3"<<endl;
     viewAll(&head);
-    reverse(&head);
+    head = reverse(head);
     cout << "Reversed List" <<endl;
     viewAll(&head);
     deleteNode(&head, 3);
     cout<<"Delete Node at position 3"<<endl;
-    viewAll(&head);
-    
+    //viewAll(&head);
+    Print(head);
+    reversePrint(head);
     return 0;
 }
 
