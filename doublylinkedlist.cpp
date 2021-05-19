@@ -31,6 +31,33 @@ void insertFront(int item){
     head = temp;
 }
 
+/*void reverse(){
+    struct Node *temp = head;
+    struct Node *p;
+    while(temp != NULL){
+        p = temp->next;
+        head = temp;
+        temp->next = temp->prev;
+        temp->prev = p;
+        temp = temp->prev;
+    }
+}*/
+
+void reverse(){
+    struct Node *temp = head;
+    struct Node* p;
+    p = temp->next;
+    if(temp->next == NULL){
+        temp->next = temp->prev;
+        temp->prev = p;
+        return;
+    }
+    temp->next = temp->prev;
+    temp->prev = p;
+    head = p;
+    reverse();
+}
+
 void Print(){
     struct Node* p = head;
     while(p != NULL){
@@ -40,9 +67,24 @@ void Print(){
     cout<<endl;
 }
 
+void reversePrint(){
+    struct Node* p = head;
+    while(p->next != NULL){
+        p = p->next;
+    }
+    while(p != NULL){
+        cout<<p->info<<' ';
+        p = p->prev;
+    }
+    cout<<endl;
+}
+
 int main(){
     for(int i = 1; i<=10; i++)
         insertFront(i);
+    Print();
+    reverse();
+    //reversePrint();
     Print();
     return 0;
 }
