@@ -44,16 +44,13 @@ void insertFront(int item){
 }*/
 
 void reverse(){
-    struct Node *temp = head;
     struct Node* p;
-    p = temp->next;
-    if(temp->next == NULL){
-        temp->next = temp->prev;
-        temp->prev = p;
+    p = head->next;
+    head->next = head->prev;
+    head->prev = p;
+    if(p == NULL){
         return;
     }
-    temp->next = temp->prev;
-    temp->prev = p;
     head = p;
     reverse();
 }
