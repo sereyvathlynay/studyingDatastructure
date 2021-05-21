@@ -22,7 +22,7 @@ struct dyStack
     struct dyStack *next;
 };
 
-struct dyStack *initialize(struct dyStack *s);
+struct dyStack *initialize();
 struct dyStack *getnode();
 struct dyStack *push(struct dyStack *s, int item);
 struct dyStack *pop(struct dyStack *s);
@@ -30,14 +30,14 @@ struct dyStack *pop(struct dyStack *s);
 int main()
 {
     struct Stack S1;
-    struct dyStack *S2;
+    struct dyStack *S2 = initialize();
     initialize(&S1);
 
     for (int i = 1; i <= 10; i++)
         push(&S1, i);
     for (int i = 0; i < 10; i++)
         cout << pop(&S1) << endl;
-
+    
     for (int i = 1; i <= 10; i++)
         S2 = push(S2, i);
     for (int i = 0; i < 10; i++)
@@ -45,7 +45,7 @@ int main()
         cout << S2->info << endl;
         S2 = pop(S2);
     }
-
+    
     return 0;
 }
 
