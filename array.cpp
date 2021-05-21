@@ -1,34 +1,51 @@
-#include<iostream>
+#include <iostream>
 
-using std::cout;
 using std::cin;
-using std::endl; 
+using std::cout;
+using std::endl;
 
 #define MaxStack 100
 
-struct Stack{
+struct Stack
+{
     int info[MaxStack];
     int top;
 };
 
-struct dyStack{
+void initialize(struct Stack *s);
+void push(struct Stack *s, int item);
+int pop(struct Stack *s);
+
+struct dyStack
+{
     int info;
-    struct dyStack* top;
-}*S2;
+    struct dyStack *next;
+};
 
-void initialize(struct dySack);
-void initialize(struct Stack* s);
-void push(struct Stack* s, int item);
-int pop(struct Stack* s);
+struct dyStack *initialize(struct dyStack *s);
+struct dyStack *getnode();
+struct dyStack *push(struct dyStack *s, int item);
+struct dyStack *pop(struct dyStack *s);
 
-int main(){
+int main()
+{
     struct Stack S1;
+    struct dyStack *S2;
     initialize(&S1);
 
-    for(int i = 1; i<= 10; i++)
+    for (int i = 1; i <= 10; i++)
         push(&S1, i);
-    for(int i = 0; i< 10; i++)
-        cout<<pop(&S1)<<endl;
+    for (int i = 0; i < 10; i++)
+        cout << pop(&S1) << endl;
+
+    for (int i = 1; i <= 10; i++)
+        S2 = push(S2, i);
+    for (int i = 0; i < 10; i++)
+    {
+        cout << S2->info << endl;
+        S2 = pop(S2);
+    }
+
     return 0;
 }
 
@@ -60,14 +77,34 @@ int pop(struct Stack *s)
     return element;
 }
 
-struct dyStack* initialize(){
+struct dyStack *initialize()
+{
     return NULL;
 }
 
-struct dyStack* getnode(){
+struct dyStack *getnode()
+{
     return new struct dyStack;
 }
 
-struct dyStack* push(struct Dystack *s){
-    
+struct dyStack *push(struct dyStack *s, int item){
+    struct dyStack* temp = getnode();
+    temp->info = item;
+    temp->next = NULL;
+    if(s != NULL)
+        temp->next = s;
+    return temp;
+}
+
+struct dyStack *pop(struct dyStack *s)
+{
+    struct dyStack *temp = s;
+    if (temp == NULL)
+    {
+        cout << "Stack underflow" << endl;
+        return NULL;
+    }
+    s = temp->next;
+    free(temp);
+    return s;
 }
