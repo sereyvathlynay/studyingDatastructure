@@ -6,6 +6,7 @@ using std::cout;
 using std::cin;
 using std::endl;
 
+
 void Reverse(char *C, int n){
     std::stack<char> S;
     for(int i = 0; i<n; i++)
@@ -18,6 +19,7 @@ void Reverse(char *C, int n){
 
 int main(){
     char C[51];
+    std::stack<struct Node*> S;
     cout<<"Enter a string: "; cin>>C;
     Reverse(C, strlen(C));
     cout<<C;
