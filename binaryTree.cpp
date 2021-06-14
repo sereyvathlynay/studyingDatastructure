@@ -61,6 +61,19 @@ void postorderView(struct Node *root)
     }
 }
 
+bool searchTree(struct Node* root, int item){
+    while(root != NULL){
+        if(root->data == item){
+            return true;
+        }
+        else if(item <= root->data)
+            root = root->left;
+        else
+            root = root->right;
+    }
+    return false;
+}
+
 int main(){
     struct Node* Tree1;
     int list[7]{5, 8, 9, 7, 3, 4, 1};
@@ -71,5 +84,9 @@ int main(){
     cout<<"Preorder: "; preorderView(Tree1); cout<<endl;
     cout<<"Inorder: "; inorderView(Tree1); cout << endl;
     cout<<"Postorder: "; postorderView(Tree1); cout << endl;
+    if(searchTree(Tree1, 2)== true)
+        cout<<"Found"<<endl;
+    else
+        cout<<"Not found"<<endl;
     return 0;
 }
