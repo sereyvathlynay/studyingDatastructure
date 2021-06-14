@@ -34,7 +34,7 @@ struct Node* insert(struct Node* root, int item){
 
 void viewAll(struct Node* root){
     if(root!= NULL){
-        cout<<root->data<<endl;
+        cout<<root->data<<' ';
         viewAll(root->left);
         viewAll(root->right);
     }
@@ -42,14 +42,18 @@ void viewAll(struct Node* root){
 
 int main(){
     struct Node* Tree1;
+    int list[7]{5, 8, 9, 7, 3, 4, 1};
     Tree1 = NULL;
-    Tree1 = insert(Tree1, 5);
+    for(int i : list){
+        Tree1 = insert(Tree1, i);
+    }
+    /*Tree1 = insert(Tree1, 5);
     Tree1 = insert(Tree1, 8);
     Tree1 = insert(Tree1, 9);
     Tree1 = insert(Tree1, 7);
     Tree1 = insert(Tree1, 3);
     Tree1 = insert(Tree1, 4);
-    Tree1 = insert(Tree1, 1);
+    Tree1 = insert(Tree1, 1);*/
     viewAll(Tree1);
     return 0;
 }
