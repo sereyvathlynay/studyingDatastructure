@@ -32,11 +32,32 @@ struct Node* insert(struct Node* root, int item){
     return root;
 }
 
-void viewAll(struct Node* root){
+
+
+void preorderView(struct Node* root){
     if(root!= NULL){
         cout<<root->data<<' ';
-        viewAll(root->left);
-        viewAll(root->right);
+        preorderView(root->left);
+        preorderView(root->right);
+    }
+}
+void inorderView(struct Node *root)
+{
+    if (root != NULL)
+    {
+        inorderView(root->left);
+        cout << root->data << ' ';
+        inorderView(root->right);
+    }
+}
+
+void postorderView(struct Node *root)
+{
+    if (root != NULL)
+    {
+        postorderView(root->left);
+        postorderView(root->right);
+        cout << root->data << ' ';
     }
 }
 
@@ -47,13 +68,8 @@ int main(){
     for(int i : list){
         Tree1 = insert(Tree1, i);
     }
-    /*Tree1 = insert(Tree1, 5);
-    Tree1 = insert(Tree1, 8);
-    Tree1 = insert(Tree1, 9);
-    Tree1 = insert(Tree1, 7);
-    Tree1 = insert(Tree1, 3);
-    Tree1 = insert(Tree1, 4);
-    Tree1 = insert(Tree1, 1);*/
-    viewAll(Tree1);
+    cout<<"Preorder: "; preorderView(Tree1); cout<<endl;
+    cout<<"Inorder: "; inorderView(Tree1); cout << endl;
+    cout<<"Postorder: "; postorderView(Tree1); cout << endl;
     return 0;
 }
