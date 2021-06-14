@@ -4,7 +4,6 @@ using std::cout;
 using std::cin;
 using std::endl;
 
-
 /*
 #define MaxQue 100
 
