@@ -73,6 +73,74 @@ bool searchTree(struct Node* root, int item){
     }
     return false;
 }
+/*
+int greatest(struct Node* root){
+    while(root->right != NULL){
+        root=root->right;
+    }
+    return root->data;
+}*/
+
+struct Node* maximum(struct Node* root){
+    struct Node* temp = root;
+    if(root->right != NULL){
+        temp = maximum(root->right);
+    }
+    return temp;
+}
+
+struct Node *minimum(struct Node *root)
+{
+    struct Node *temp = root;
+    if (root->left != NULL)
+    {
+        temp = minimum(root->left);
+    }
+    return temp;
+}
+
+struct Queue{
+    struct Node* data[100];
+    int front;
+    int rear;
+};
+
+void enqueue(struct Queue q, struct Node* item){
+    if(q.rear>=100){
+        return;
+    }
+    q.rear += 1;
+    q.data[q.rear] = item;
+}
+
+struct Node* dequeue(struct Queue q){
+    if(q.front >= q.rear){
+        return NULL;
+    }
+    q.front += 1;
+    struct Node* element = q.data[q.front];
+    return element;
+}
+
+void levelTraversal(struct Node* root){
+    struct Queue q;
+    struct Node* p = root;
+    enqueue(q, p);
+    while(q.front < q.rear){
+        p = dequeue(q);
+        cout<<p->data<<" ";
+        if(p->left == NULL && p->right == NULL)
+            NULL;
+        else if(p->left == NULL)
+            enqueue(q, p->right);
+        else if(p->right == NULL)
+            enqueue(q, p->left);
+        else{
+            enqueue(q, p->left);
+            enqueue(q, p->right);
+        }
+    }
+}
 
 int main(){
     struct Node* Tree1;
@@ -88,5 +156,10 @@ int main(){
         cout<<"Found"<<endl;
     else
         cout<<"Not found"<<endl;
+    struct Node* p=maximum(Tree1);
+    cout<<"Greatest number: "<<p->data<<endl;
+    p=minimum(Tree1);
+    cout<<"Minimum number: "<<p->data<<endl;
+    levelTraversal(Tree1);
     return 0;
 }
